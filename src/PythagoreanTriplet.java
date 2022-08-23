@@ -1,23 +1,56 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class PythagoreanTriplet
 {
-    public void pythagoreanTriplet(int n)
+    int a,b,c,limit,sum;
+
+    public PythagoreanTriplet() {
+    }
+
+    public PythagoreanTriplet(int a, int b, int c)
     {
-        int a,b,c;
-        for (a=1; a<(n/3); a++)
+        this.a=a;
+        this.b=b;
+        this.c=c;
+    }
+
+    public static PythagoreanTriplet makeTripletsList()
+    {
+        return new PythagoreanTriplet();
+    }
+
+    public PythagoreanTriplet withFactorsLessThanOrEqualTo(int n)
+    {
+        this.limit=n;
+        return this;
+    }
+
+    public PythagoreanTriplet thatSumTo(int sum)
+    {
+        this.sum=sum;
+        return this;
+    }
+
+    public List<PythagoreanTriplet> build()
+    {
+        List<PythagoreanTriplet> actual = new ArrayList<>();
+        int p,q,r;
+        for (p=1; a<(this.sum/3); p++)
         {
-            for (b=a+1; b<n; b++)
+            for (q=p+1; q<this.sum; q++)
             {
-                c=n-(a+b);
-                if (b>=c)
+                r=this.sum-(p+q);
+                if (q>=r)
                 {
                     break;
                 }
-                if (((a*a) + (b*b)) == c*c)
+                if (((p*p) + (q*q)) == r*r)
                 {
-                    System.out.println(+a+","+b+","+c);
+                    actual.add(new PythagoreanTriplet(p, q, r));
                 }
             }
         }
+        return actual;
     }
 }
-
